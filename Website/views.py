@@ -2,10 +2,12 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from .models import Post
 
 
 def index(request):
-    temp_context = {
-        "posts": "hello"
+    all_posts = Post.objects.all();
+    context = {
+        "posts": all_posts
     }
-    return render(request, 'Website/index.html', temp_context)
+    return render(request, 'Website/index.html', context)
