@@ -3,4 +3,9 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-# Create your views here.
+
+def index(request):
+    temp_context = {
+        "posts": "hello"
+    }
+    return render(request, 'Website/index.html', temp_context)
