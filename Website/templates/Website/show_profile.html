@@ -1,0 +1,23 @@
+{% extends 'Website/base.html' %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+		<div class='container'>
+			<div class='panel'>
+				<div class='panel-heading'>
+					{{user.username}}
+				</div>
+
+				<div class='panel-body'>
+					Name: {{user.profile.fullname}}
+					Gender: {{user.profile.gender}}
+				</div>
+			</div>
+		</div>
+	{% else %}
+
+		<br><br><br><br>NO ACCOUNT, HOW PROFILE ?
+{% endblock %}

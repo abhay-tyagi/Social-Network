@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block page_title %}Social Network{% endblock %}</title>
+	<title>{% block title %}{% endblock %}</title>
 
 	{% load staticfiles %}
 
@@ -30,7 +30,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="{% url 'show_profile' %}">Profile</a></li>
                 <li><a href="#">Messages</a></li>
             </ul>
         </div>

@@ -11,3 +11,7 @@ def index(request):
         "posts": all_posts
     }
     return render(request, 'Website/index.html', context)
+
+def show_profile(request):
+
+	return render(request, 'Website/show_profile.html', {})

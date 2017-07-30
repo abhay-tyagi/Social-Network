@@ -21,13 +21,26 @@ class Profile(models.Model):
 	profession = models.CharField(max_length=20)
 	#friends = models.IntegerField(default=0) For later
 
+class Post(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	date = models.DateField(default=datetime.date.today)
+	content = models.TextField()
+	title = models.CharField(max_length=50, default="my_post")
+	like_count = models.IntegerField(default=0)
+	time = models.TimeField(default=datetime.datetime.now)
+
+	def __str__(self):
+		return self.title
+
 class Like(models.Model):
+	post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
 	by = models.ForeignKey(User, on_delete=models.CASCADE)
 	to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes")
 
 
 class Comment(models.Model):
 	content = models.TextField()
+	post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
 	by = models.ForeignKey(User, on_delete=models.CASCADE)
 	to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
 	date = models.DateField(default=datetime.date.today)	
@@ -37,15 +50,3 @@ class Comment(models.Model):
 		return self.content
 
 
-class Post(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	date = models.DateField(default=datetime.date.today)
-	content = models.TextField()
-	title = models.CharField(max_length=50, default="my_post")
-	likes = models.ForeignKey(Like, on_delete=models.CASCADE)
-	like_count = models.IntegerField(default=0)
-	comments = models.ForeignKey(Comment, on_delete=models.CASCADE)
-	time = models.TimeField(default=datetime.datetime.now)
-
-	def __str__(self):
-		return self.title
