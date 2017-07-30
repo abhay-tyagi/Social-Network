@@ -4,8 +4,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment, Like, User
 from django.contrib.auth import authenticate, login, logout
 
+
 def index(request):
-    all_posts = Post.objects.all();
+    all_posts = Post.objects.all()
     context = {
         "posts": all_posts
     }
