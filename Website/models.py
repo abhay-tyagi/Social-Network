@@ -8,7 +8,6 @@ import datetime
 # Create your models here.
 
 Gender_choice = (
-	('Select gender', '-'),
 	('Male', 'Male'),
 	('Female', 'Female'),
 	)
@@ -17,7 +16,7 @@ Gender_choice = (
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	fullname = models.CharField(max_length=50)
-	gender = models.CharField(max_length=6, choices = Gender_choice)  #No LGBT
+	gender = models.CharField(max_length=6, choices = Gender_choice, null=True)  #No LGBT
 	profession = models.CharField(max_length=20)
 	#friends = models.IntegerField(default=0) For later
 
@@ -25,7 +24,7 @@ class Post(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	date = models.DateField(default=datetime.date.today)
 	content = models.TextField()
-	title = models.CharField(max_length=50, default="my_post")
+	title = models.CharField(max_length=50, default="Post title")
 	like_count = models.IntegerField(default=0)
 	time = models.TimeField(default=datetime.datetime.now)
 
