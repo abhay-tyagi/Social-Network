@@ -1,3 +1,27 @@
 body {
 	background-color: lightblue;
 }
+
+#navbarhome {
+	padding-bottom: 100px;
+}
+
+#logbtn {
+	margin-right: 20px;
+}
+
+.btn-success {
+	background-color: brown;
+}
+
+.navbar-inverse {
+    background-color: brown;
+}
+
+#logout {
+	margin-right: 20px;
+}
+
+.panel-info {
+	width: 400px;
+}

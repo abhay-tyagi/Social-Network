@@ -8,14 +8,14 @@
 <br><br><br>
 	{% if user.is_authenticated %}
 		<div class='container'>
-			<div class='panel'>
+			<div class='panel panel-info'>
 				<div class='panel-heading'>
 					{{user.username}}
 				</div>
 
 				<div class='panel-body'>
-					Name: {{user.profile.fullname}}
-					Gender: {{user.profile.gender}}
+					<p>Name: {{user.first_name}} {{user.last_name}}</p>
+					<p>Email: {{user.email}}</p>
 				</div>
 			</div>
 		</div>

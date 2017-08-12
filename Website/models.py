@@ -7,18 +7,13 @@ import datetime
 
 # Create your models here.
 
-Gender_choice = (
-	('Male', 'Male'),
-	('Female', 'Female'),
-	)
 
-
-class Profile(models.Model):
+'''class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	fullname = models.CharField(max_length=50)
-	gender = models.CharField(max_length=6, choices = Gender_choice, null=True)  #No LGBT
+	gender = models.CharField(max_length=6, null=True)  #No LGBT
 	profession = models.CharField(max_length=20)
-	#friends = models.IntegerField(default=0) For later
+	dob = models.DateField(null=True)
+	#friends = models.IntegerField(default=0) For later'''
 
 class Post(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)

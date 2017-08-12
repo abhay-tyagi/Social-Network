@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block title %}{% endblock %}</title>
+	{% block title %}{% endblock %}
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	
@@ -17,31 +17,63 @@
 
 </head>
 <body>
-
     <div class='container-fluid' id='navbarhome'>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
-            </div>
-            <ul class="nav navbar-nav">
+        <nav class='navbar navbar-inverse navbar-fixed-top'>
+            <div class='navbar-header'>
                 {% if user.is_authenticated %}
-                <li><a href="#">Home</a></li>
-                <li><a href="{% url 'show_profile' %}">Profile</a></li>
-                <li><a href="#">Messages</a></li>
+                    <a class='navbar-brand' href='{% url "index" %}'>{{user.username}}</a>
                 {% else %}
-                <li><a href="{% url 'show_profile' %}">Profile</a></li>
-                <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-default">Login</button>
-                    <a href="#" class="btn btn-info">Register</a>
-                </form>
+                    <a class='navbar-brand' href='{% url "index" %}'>TheSN</a>
                 {% endif %}
-            </ul>
-        </div>
-    </nav>
+            </div>
+
+            <div class='collapse navbar-collapse' id='topnavbar'>
+                <ul class='nav navbar-nav'>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href='{% url "index" %}'>
+                            <span class='glyphicon glyphicon-home' aria-hidden='true'></span>&nbsp;
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href='{% url "show_profile" %}'>
+                            <span class='glyphicon glyphicon-notes-2' aria-hidden='true'></span>&nbsp;
+                            Profile
+                        </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+                    {% if user.is_authenticated %}
+                    <ul class='nav navbar-nav navbar-right'>
+                        <li id='logout'>
+                            <a href='{% url "logout"%}?next={{request.path}}'>
+                                <span class='glyphicon glyphicon-off' aria-hidden='true'></span>&nbsp;
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                    {% else %}
+                        <form name ='loginform' id='login_form' class='navbar-form navbar-right' role='form' method='post' action='/login/'>
+                        {% csrf_token %}
+                            <div class='input-group'>
+                              <span class='input-group-addon'><i class='glyphicon glyphicon-user'></i></span>
+                              <input autocomplete='off' id='username' type='text' class='form-control' name='username' placeholder='Username'>                                        
+                            </div>
+
+                            <div class='input-group'>
+                              <span class='input-group-addon'><i class='glyphicon glyphicon-lock'></i></span>
+                              <input autocomplete='off' id='password' type='password' class='form-control' name='password' placeholder='Password'>                                        
+                            </div>
+
+                            <button type='submit' value='login' class='btn btn-success' id='logbtn'>Login</button>
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                        </form>
+                    {% endif %}
+            </div>
+        </nav>
     </div>
 
 {% block content %}
