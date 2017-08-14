@@ -77,7 +77,8 @@ class AddPost(View):
         post.save()
 
         posts = Post.objects.all()
-        return render(request, 'Website/index.html', {'already_member': already_member, 'posts': posts})
+        return redirect('index')
+        #return render(request, 'Website/index.html', {'already_member': already_member, 'posts': posts})
 
 
 @login_required
