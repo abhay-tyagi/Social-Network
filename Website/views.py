@@ -68,8 +68,9 @@ class AddPost(View):
         already_member = True
 
         if form.is_valid():
-            post = form.save(commit=False)
+            #post = form.save(commit=False)
 
+            post = Post()
             post_user = request.user
             post_content = form.cleaned_data['post_content']
             post_time = datetime.datetime.now()

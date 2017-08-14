@@ -24,7 +24,7 @@ class Post(models.Model):
     time = models.TimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.title
+        return self.content
 
 
 class Like(models.Model):

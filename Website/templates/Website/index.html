@@ -31,7 +31,6 @@
         	<div class='col-sm-6'>
         		{% for post in posts %}
                     {% if post.user != user.username %}
-                        <h1> {{ post.title }} </h1>
                         <p> {{ post.content }} </p>
                     {% endif %}
         		{% endfor %}
