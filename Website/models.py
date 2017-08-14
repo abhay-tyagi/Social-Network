@@ -15,32 +15,31 @@ import datetime
 	dob = models.DateField(null=True)
 	#friends = models.IntegerField(default=0) For later'''
 
-class Post(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	date = models.DateField(default=datetime.date.today)
-	content = models.TextField()
-	title = models.CharField(max_length=50, default="Post title")
-	like_count = models.IntegerField(default=0)
-	time = models.TimeField(default=datetime.datetime.now)
 
-	def __str__(self):
-		return self.title
+class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_posts")
+    date = models.DateField(default=datetime.date.today)
+    content = models.TextField()
+    like_count = models.IntegerField(default=0)
+    time = models.TimeField(default=datetime.datetime.now)
+
+    def __str__(self):
+        return self.title
+
 
 class Like(models.Model):
-	post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
-	by = models.ForeignKey(User, on_delete=models.CASCADE)
-	to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    by = models.ForeignKey(User, on_delete=models.CASCADE)
+    to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes")
 
 
 class Comment(models.Model):
-	content = models.TextField()
-	post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
-	by = models.ForeignKey(User, on_delete=models.CASCADE)
-	to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
-	date = models.DateField(default=datetime.date.today)	
-	time = models.TimeField(default=datetime.datetime.now)
+    content = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    by = models.ForeignKey(User, on_delete=models.CASCADE)
+    to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    date = models.DateField(default=datetime.date.today)
+    time = models.TimeField(default=datetime.datetime.now)
 
-	def __str__(self):
-		return self.content
-
-
+    def __str__(self):
+        return self.content
