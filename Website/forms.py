@@ -22,8 +22,9 @@ class Logform(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(), required=True)
 
 
-class PostForm(forms.Form):
-    text = forms.CharField(widget=forms.Textarea, label="")
+class PostForm(forms.ModelForm):
+    post_content = forms.CharField(widget=forms.Textarea, label="")
 
     class Meta:
         model = Post
+        fields = ('post_content',)

@@ -15,7 +15,7 @@ def index(request):
     post_form = PostForm
 
     if request.user.is_authenticated:
-        posts = request.user.user_posts.filter()
+        posts = Post.objects.all()
         return render(request, 'Website/index.html', {'posts': posts, 'post_form': post_form})
 
     return render(request, 'Website/index.html', {'reg_form': registration_form})
@@ -66,23 +66,15 @@ class AddPost(View):
     def post(self, request):
         form = self.form_class(request.POST)
         already_member = True
+        post = Post()
+        post = form.save(commit=False)
 
-        if form.is_valid():
-            #post = form.save(commit=False)
-
-            post = Post()
-            post_user = request.user
-            post_content = form.cleaned_data['post_content']
-            post_time = datetime.datetime.now()
-            post_date = datetime.date.today()
-
-            post.user = post_user
-            post.content = post_content
-            post.time = post_time
-            post.date = post_date
-            post.save()
-
-            return redirect('index')
+        post.user = request.user
+        post_content = form.cleaned_data['post_content']
+        post.content = post_content
+        post.time = datetime.datetime.now()
+        post.date = datetime.date.today()
+        post.save()
 
         posts = Post.objects.all()
         return render(request, 'Website/index.html', {'already_member': already_member, 'posts': posts})
