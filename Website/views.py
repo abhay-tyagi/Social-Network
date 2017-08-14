@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment, Like, User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import View
 from .forms import Regform, PostForm
 import datetime
@@ -54,7 +55,7 @@ class register(View):
         return render(request, 'Website/index.html', {'already_member': already_member, 'posts': posts})
 
 
-@login_required
+@method_decorator(login_required, name='dispatch')
 class AddPost(View):
     form_class = PostForm
 
