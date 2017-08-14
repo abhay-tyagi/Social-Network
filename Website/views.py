@@ -66,15 +66,19 @@ class AddPost(View):
     def post(self, request):
         form = self.form_class(request.POST)
         already_member = True
-        post = Post()
-        post = form.save(commit=False)
 
-        post.user = request.user
-        post_content = form.cleaned_data['post_content']
-        post.content = post_content
-        post.time = datetime.datetime.now()
-        post.date = datetime.date.today()
-        post.save()
+        if form.is_valid():
+            post = Post()
+            post = form.save(commit=False)
+
+            post.user = request.user
+            post_content = form.cleaned_data['post_content']
+            post.content = post_content
+            post.time = datetime.datetime.now()
+            post.date = datetime.date.today()
+            post.save()
+
+            return redirect('index')
 
         posts = Post.objects.all()
         return redirect('index')
