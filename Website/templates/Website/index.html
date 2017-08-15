@@ -7,7 +7,7 @@
 {% if user.is_authenticated %}
     <div class="container">
         <div class='row'>
-        	<div class='col-sm-6'>
+        	<div class='col-lg-6'>
                 <div class="panel panel-default">
         			<div class='panel-heading'>
         				<h3>What's on your mind</h3>
@@ -29,12 +29,21 @@
         </div>
         <div class='row'>
         	<div class='col-sm-6'>
-        		{% for post in posts reversed %}
-                    {% if post.user != user.username %}
-                        <p> {{ post.content }} </p>
-                    {% endif %}
-        		{% endfor %}
-        	</div>
+                {% for post in posts reversed %}
+                     <div class="panel panel-default post-panel">
+
+                             <div class='panel-heading'>
+                                <h3>{{ post.user }}</h3>
+                             </div>
+                             <div class="panel-body">
+                                 <p> {{ post.content }} </p>
+                             </div>
+                             <div class="panel-footer">
+                                 {{ post.time }} {{ post.date }}
+                             </div>
+                     </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
