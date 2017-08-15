@@ -40,6 +40,11 @@
                              </div>
                              <div class="panel-footer">
                                  {{ post.time }} {{ post.date }}
+                                 <div class="pull-right">
+                                     <a href="/likepost/{{ post.id }}" class="like-button">
+                                        <span class='glyphicon glyphicon-heart' aria-hidden='true'></span>&nbsp;{{ post.like_count }}
+                                     </a>
+                                 </div>
                              </div>
                      </div>
                 {% endfor %}

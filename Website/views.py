@@ -87,3 +87,11 @@ class AddPost(View):
 @login_required
 def show_profile(request):
     return render(request, 'Website/show_profile.html')
+
+
+def likepost(request, postid):
+
+    current_post = Post.objects.get(pk=postid)
+    current_post.like_count = current_post.like_count + 1
+    current_post.save()
+    return redirect('index')
