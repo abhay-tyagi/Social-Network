@@ -16,7 +16,8 @@ def index(request):
 
     if request.user.is_authenticated:
         posts = Post.objects.all()
-        return render(request, 'Website/index.html', {'posts': posts, 'post_form': post_form})
+        curr_time = datetime.date.today()
+        return render(request, 'Website/index.html', {'posts': posts, 'post_form': post_form, 'curr_time': curr_time})
 
     return render(request, 'Website/index.html', {'reg_form': registration_form})
 
@@ -82,17 +83,18 @@ class AddPost(View):
 
         posts = Post.objects.all()
         return redirect('index')
-        #return render(request, 'Website/index.html', {'already_member': already_member, 'posts': posts})
 
 
 @login_required
 def show_profile(request):
-    return render(request, 'Website/show_profile.html')
+    posts = Post.objects.all()
+
+    return render(request, 'Website/show_profile.html', {'posts': posts})
 
 
 def likepost(request, postid):
 
     current_post = Post.objects.get(pk=postid)
-    current_post.like_count = current_post.like_count + 1
+    current_post.like_count = 1 - current_post.like_count
     current_post.save()
     return redirect('index')

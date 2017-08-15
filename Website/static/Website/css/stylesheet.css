@@ -22,10 +22,6 @@ body {
 	margin-right: 20px;
 }
 
-.panel-info {
-	width: 400px;
-}
-
 .like-button:hover {
 	text-decoration: none;
 }
