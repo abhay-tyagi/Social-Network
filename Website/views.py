@@ -93,7 +93,6 @@ def show_profile(request):
 
 
 def likepost(request, postid):
-
     current_post = Post.objects.get(pk=postid)
     current_post.like_count = 1 - current_post.like_count
     current_post.save()
