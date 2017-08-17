@@ -87,9 +87,9 @@ class AddPost(View):
 
 
 @login_required
-def show_profile(request, pk):
+def show_profile(request, username):
     posts = Post.objects.all()
-    user = User.objects.get(pk=pk)
+    user = User.objects.get(username=username)
     return render(request, 'Website/show_profile.html', {'posts': posts, 'user': user})
 
 
@@ -98,6 +98,3 @@ def likepost(request, postid):
     current_post.like_count = 1 - current_post.like_count
     current_post.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-    #return redirect(request.url)

@@ -34,7 +34,7 @@
                     <div class='col-lg-12'>
                          <div class="panel panel-default post-panel">
                              <div class='panel-heading'>
-                                <a href="{% url 'show_profile' post.user.id %}"><h4>{{ post.user }}</h4></a>
+                                <a href="{% url 'show_profile' post.user %}"><h4>{{ post.user }}</h4></a>
                                 <p>{{ post.date|timesince }} ago</p>
                              </div>
                              <div class="panel-body">
