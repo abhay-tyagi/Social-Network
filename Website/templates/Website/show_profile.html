@@ -1,17 +1,22 @@
 {% extends 'Website/base.html' %}
 
 {% block title %}
-	<title>Your Profile</title>
+	<title>{{ request.user }} | Profile</title>
 {% endblock %}
 
 {% block content %}
 	{% if user.is_authenticated %}
 	<div class='container'>
 		<div class='row'>
-			<div class='col-sm-6'>
+			<div class='col-sm-4'>
 				<div class='panel panel-info'>
 					<div class='panel-heading'>
 						Personal Information
+                        <div class="pull-right">
+                            <a href="">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
+                            </a>
+                        </div>
 					</div>
 
 					<div class='panel-body'>
@@ -22,14 +27,14 @@
 				</div>
 			</div>
 		
-			<div class='col-sm-6'>
+			<div class='col-sm-8'>
 				 {% for post in posts reversed %}
 				 {% if post.user.username == user.username %}
 					<div class="panel panel-default">
 
 						<div class='panel-heading'>
 							<h3>{{ post.user }}</h3>
-                                    <p>{{ post.date|timesince }} ago</p>
+                            <p>{{ post.date|timesince }} ago</p>
 						</div>
 						<div class="panel-body">
 							<p> {{ post.content }} </p>
@@ -37,8 +42,8 @@
 						<div class="panel-footer">
 							{{ post.time }} {{ post.date }}
 							<div class="pull-right">
-								<a href="/likepost/{{ post.id }}" class="like-button">
-									<span class='glyphicon glyphicon-heart' aria-hidden='true'></span>&nbsp;{{ post.like_count }}
+								<a href="#" class="like-button">
+									<span class='glyphicon glyphicon-heart like-button' aria-hidden='true'></span>&nbsp;{{ post.like_count }}
 								</a>
 							</div>
 						</div>
