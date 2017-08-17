@@ -33,7 +33,7 @@
 					<div class="panel panel-default">
 
 						<div class='panel-heading'>
-							<h3>{{ post.user }}</h3>
+							<a href="{% url 'show_profile' user.id %}">{{ post.user }}</a>
                             <p>{{ post.date|timesince }} ago</p>
 						</div>
 						<div class="panel-body">
@@ -42,7 +42,7 @@
 						<div class="panel-footer">
 							{{ post.time }} {{ post.date }}
 							<div class="pull-right">
-								<a href="#" class="like-button">
+								<a href="{% url 'likepost' post.id %}" class="like-button">
 									<span class='glyphicon glyphicon-heart like-button' aria-hidden='true'></span>&nbsp;{{ post.like_count }}
 								</a>
 							</div>

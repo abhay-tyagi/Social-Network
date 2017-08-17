@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import View
+from django.http import HttpResponseRedirect
 from .forms import Regform, PostForm
 import datetime
 
@@ -86,14 +87,17 @@ class AddPost(View):
 
 
 @login_required
-def show_profile(request):
+def show_profile(request, pk):
     posts = Post.objects.all()
-
-    return render(request, 'Website/show_profile.html', {'posts': posts})
+    user = User.objects.get(pk=pk)
+    return render(request, 'Website/show_profile.html', {'posts': posts, 'user': user})
 
 
 def likepost(request, postid):
     current_post = Post.objects.get(pk=postid)
     current_post.like_count = 1 - current_post.like_count
     current_post.save()
-    return redirect('index')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+    #return redirect(request.url)
